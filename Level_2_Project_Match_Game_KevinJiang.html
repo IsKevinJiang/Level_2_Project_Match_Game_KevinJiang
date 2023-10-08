@@ -2,86 +2,15 @@
 	<html>
 		<head>
 			<title>Level 2 Match Game</title>
-			<script>
-				let score = 0;
-				let guess = 0;
-				let previous_img = "";
-
-				function initialize() {
-					user_score = document.getElementById("score");
-				}
-				function reset(image) {
-					document.getElementById(image).src = "Unknown.jpg";
-				}
-
-				function reveal(image) {
-					guess++;
-					score++;
-					let picture = image.substring(0,5);
-					
-					if (guess === 2 && image !== previous_img){ 
-						if (picture === previous_img.substring(0,5)) {
-							document.getElementById(picture + "_1").src = picture + ".jpg";
-							document.getElementById(picture + "_2").src = picture + ".jpg";
-						}
-						else {
-							document.getElementById(image).src = image.substring(0,5) + ".jpg";
-							setTimeout(reset,1000,previous_img)
-							setTimeout(reset,1000,image);
-						}
-						guess = 0;
-					}
-					else {
-						previous_img = image;
-						document.getElementById(image).src = picture + ".jpg";
-					}
-				user_score.innerHTML = "Score: " + score;
-				}
-
-				function resetAll() {
-					for (let i = 1; i < 9; i++){
-						for (let j = 1; j < 3; j++) {
-							reset("IMG_" + i + "_" + j);
-						}
-					}
-					score = 0;
-					user_score.innerHTML = "Score: 0";
-
-				}
-			</script>
-			<style>
-				h1 {
-					text-align: center;
-				}
-				img {
-					height: 130px;
-					width: 200px;
-					border-radius: 5%
-				}
-				#score {
-					font-size: 30px;
-					text-align: center;
-					font-weight: bold;
-				}
-				#reset_button {
-					background-color: #4CAF50; /* Green */
-					border: none;
-					color: white;
-					padding: 15px 32px;
-					text-align: center;
-					text-decoration: none;
-					display: inline-block;
-					font-size: 16px;
-					text-align:center;
-				}
-				div {
-					text-align: center;
-				}
-
-			</style>
+			<script src="script.js"></script>
+			<link rel="stylesheet" type = "text/css" href = "style.css">
 		</head>
 	<body onload = "initialize();">
 	<h1>The Match Game</h1>
+	<div id = "instructions">
+		Instructions: Click on the unknown images to reveal and match the pictures. Lowest Score Wins.
+	</div>
+	<div></div>
 	<div id = "board">
 		<img id = "IMG_5_1" onclick = "reveal('IMG_5_1');" src = "Unknown.jpg" />
 		<img id = "IMG_1_1" onclick = "reveal('IMG_1_1');" src = "Unknown.jpg" />
@@ -104,6 +33,6 @@
 		<img id = "IMG_7_2" onclick = "reveal('IMG_7_2');" src = "Unknown.jpg" />
 	</div>
 		<div id = "score">Score: 0</div>
-		<div><button id ="reset_button" onclick = "resetAll();">Reset Board</button></div>
+		<div class ="center"><button id ="reset_button" onclick = "resetAll();">Reset Board</button></div>
 	</body>
 </html>
